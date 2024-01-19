@@ -22,10 +22,8 @@ namespace Amenonegames.AutoNullObjGenerator
         
         public void Initialize(IncrementalGeneratorInitializationContext  context)
         {
-            context.RegisterPostInitializationOutput(x => SetDefaultAttribute(x));
+            context.RegisterPostInitializationOutput(static x => SetDefaultAttribute(x));
             
-            
-
             var providerInh = context.SyntaxProvider.ForAttributeWithMetadataName
                 (
                     context,
@@ -51,7 +49,7 @@ namespace Amenonegames.AutoNullObjGenerator
             
             context.RegisterSourceOutput(
                 context.CompilationProvider.Combine(combinedProvider),
-                (sourceProductionContext, t) =>
+                static (sourceProductionContext, t) =>
                 {
                     var (compilation, array) = t;
                     var (left , right) = array;
@@ -312,7 +310,7 @@ namespace Amenonegames.AutoNullObjGenerator
             return null; // グローバル名前空間にある場合
         }
         
-        private void SetDefaultAttribute(IncrementalGeneratorPostInitializationContext context)
+        private static void SetDefaultAttribute(IncrementalGeneratorPostInitializationContext context)
         {
             // AutoPropertyAttributeのコード本体
             const string AttributeText = @"

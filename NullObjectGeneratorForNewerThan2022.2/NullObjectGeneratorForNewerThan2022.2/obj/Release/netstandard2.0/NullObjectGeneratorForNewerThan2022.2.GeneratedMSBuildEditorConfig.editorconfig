@@ -1,0 +1,9 @@
+is_global = true
+build_property.RootNamespace = NullObjectGeneratorForNewerThan2022.2
+build_property.ProjectDir = C:\Users\tamed\Documents\project\NullObjectGeneratorForNewerThan2022.2\NullObjectGeneratorForNewerThan2022.2\NullObjectGeneratorForNewerThan2022.2\
+build_property.PolySharpUsePublicAccessibilityForGeneratedTypes = 
+build_property.PolySharpIncludeRuntimeSupportedAttributes = 
+build_property.PolySharpUseInteropServices2NamespaceForUnmanagedCallersOnlyAttribute = 
+build_property.PolySharpExcludeGeneratedTypes = 
+build_property.PolySharpIncludeGeneratedTypes = 
+build_property.PolySharpExcludeTypeForwardedToDeclarations = 
