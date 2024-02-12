@@ -28,7 +28,7 @@ namespace Amenonegames.AutoNullObjGenerator
                 (
                     context,
                     "NullObjectGenerator.InheritsToNullObjAttribute",
-                    static (node, cancellation) => true,//node is FieldDeclarationSyntax,
+                    static (node, cancellation) => node is ClassDeclarationSyntax,
                     static (cont, cancellation) => cont
                 )
                 .Combine(context.CompilationProvider)
@@ -38,7 +38,7 @@ namespace Amenonegames.AutoNullObjGenerator
                 (
                     context,
                     "NullObjectGenerator.InterfaceToNullObjAttribute",
-                    static (node, cancellation) => true,//node is FieldDeclarationSyntax,
+                    static (node, cancellation) => node is InterfaceDeclarationSyntax,
                     static (cont, cancellation) => cont
                 )
                 .Combine(context.CompilationProvider)

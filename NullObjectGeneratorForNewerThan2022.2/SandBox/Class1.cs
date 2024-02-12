@@ -24,9 +24,14 @@ namespace SandBox
     }
 
     [InterfaceToNullObj(LogType.ThrowException)]
-    public interface IFuga
+    public interface IFuga : IFugaBase
     {
         uint Uin { get; set; }
         string GetTestStr(string source);
+    }
+    
+    public interface IFugaBase
+    {
+        void FugaBase();
     }
 }

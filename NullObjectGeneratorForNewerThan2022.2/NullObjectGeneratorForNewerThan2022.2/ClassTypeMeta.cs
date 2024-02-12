@@ -104,7 +104,7 @@ class ClassTypeMeta
                 break;
             
             case InterfaceDeclarationSyntax:
-                Interfaces = ImmutableArray.Create<INamedTypeSymbol>(SourceSymbol);
+                Interfaces = SourceSymbol.AllInterfaces.Add(SourceSymbol);
                 break;
         }
         
