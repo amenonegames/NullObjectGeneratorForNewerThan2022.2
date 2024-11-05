@@ -3,7 +3,7 @@ using NullObjectGenerator;
 
 namespace SandBox
 {
-    [InheritsToNullObj(LogType.ThrowException)]
+    [InheritsToNullObj(NullObjLog.ThrowException)]
     public class Class1 : IHoge
     {
         private string _testStr;
@@ -23,7 +23,7 @@ namespace SandBox
 
     }
 
-    [InterfaceToNullObj(LogType.ThrowException)]
+    [InterfaceToNullObj(NullObjLog.ThrowException)]
     public interface IFuga : IFugaBase
     {
         uint Uin { get; set; }

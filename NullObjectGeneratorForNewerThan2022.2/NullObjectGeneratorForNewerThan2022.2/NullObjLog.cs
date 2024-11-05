@@ -3,7 +3,7 @@
 namespace Amenonegames.AutoNullObjGenerator
 {
     [Flags]
-    public enum LogType
+    internal enum NullObjLog
     {
         None = 0,
         DebugLog = 1,

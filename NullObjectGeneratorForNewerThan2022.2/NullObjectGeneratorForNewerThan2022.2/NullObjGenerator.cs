@@ -174,7 +174,7 @@ namespace Amenonegames.AutoNullObjGenerator
                     {
                         codeWriter.AppendLine($@"get");
                         codeWriter.BeginBlock();
-                        AppendLog(codeWriter, classTypeMeta.LogArgument, $@"{proprety.Name} is null. return default value.");
+                        AppendLog(codeWriter, classTypeMeta.NullObjLogArgument, $@"{proprety.Name} is null. return default value.");
                         codeWriter.AppendLine($@"return default;");
                         codeWriter.EndBlock();
                     }
@@ -182,7 +182,7 @@ namespace Amenonegames.AutoNullObjGenerator
                     {
                         codeWriter.AppendLine("set"); 
                         codeWriter.BeginBlock();
-                        AppendLog(codeWriter, classTypeMeta.LogArgument, $@"{proprety.Name} is null. do nothing.");
+                        AppendLog(codeWriter, classTypeMeta.NullObjLogArgument, $@"{proprety.Name} is null. do nothing.");
                         codeWriter.EndBlock();
                     }
                     
@@ -242,7 +242,7 @@ namespace Amenonegames.AutoNullObjGenerator
                         codeWriter.AppendLine($@"{outModifierParam.Name} = default;");
                     }
 
-                    AppendLog(codeWriter, classTypeMeta.LogArgument, $@"{method.Name} is null. do nothing.");
+                    AppendLog(codeWriter, classTypeMeta.NullObjLogArgument, $@"{method.Name} is null. do nothing.");
 
                     if(method.ReturnType.Name == "UniTask")
                     {
@@ -274,21 +274,21 @@ namespace Amenonegames.AutoNullObjGenerator
             
         }
 
-        private static void AppendLog( CodeWriter sb, LogType logType , string message)
+        private static void AppendLog( CodeWriter sb, NullObjLog nullObjLog , string message)
         {
-            if (logType.HasFlag(LogType.DebugLog))
+            if (nullObjLog.HasFlag(NullObjLog.DebugLog))
             {
                 sb.AppendLine($@"UnityEngine.Debug.Log(@""{message}"");");
             }
-            if (logType.HasFlag(LogType.DebugLogErr))
+            if (nullObjLog.HasFlag(NullObjLog.DebugLogErr))
             {
                 sb.AppendLine($@"UnityEngine.Debug.LogError(@""{message}"");");
             }
-            if (logType.HasFlag(LogType.DebugLogWarn))
+            if (nullObjLog.HasFlag(NullObjLog.DebugLogWarn))
             {
                 sb.AppendLine($@"UnityEngine.Debug.LogWarning(@""{message}"");");
             }
-            if (logType.HasFlag(LogType.ThrowException))
+            if (nullObjLog.HasFlag(NullObjLog.ThrowException))
             {
                 sb.AppendLine($@"throw new System.Exception(@""{message}"");");
             }
@@ -321,8 +321,8 @@ namespace NullObjectGenerator
                     Inherited = false, AllowMultiple = false)]
     sealed class InheritsToNullObjAttribute : Attribute
     {
-        public LogType LogType { get; }
-        public InheritsToNullObjAttribute( LogType logType = LogType.None)
+        public NullObjLog LogType { get; }
+        public InheritsToNullObjAttribute( NullObjLog logType = NullObjLog.None)
         {
             LogType = logType;
         }
@@ -332,15 +332,15 @@ namespace NullObjectGenerator
                     Inherited = false, AllowMultiple = false)]
     sealed class InterfaceToNullObjAttribute : Attribute
     {
-        public LogType LogType { get; }
-        public InterfaceToNullObjAttribute( LogType logType = LogType.None)
+        public NullObjLog LogType { get; }
+        public InterfaceToNullObjAttribute( NullObjLog logType = NullObjLog.None)
         {
             LogType = logType;
         }
     }
 
     [Flags]
-    public enum LogType
+    internal enum NullObjLog
     {
         None = 0,
         DebugLog = 1,

@@ -53,7 +53,7 @@ class ClassTypeMeta
     public ImmutableArray<AttributeData> AttributeDatas { get; }
     public string TypeName { get; }
     public string FullTypeName { get; }
-    public LogType LogArgument { get; }
+    public NullObjLog NullObjLogArgument { get; }
     public INamedTypeSymbol ClassSymbol { get;  }
     public List<IMethodSymbol> Methods { get;  } = new();
     public List<IPropertySymbol> Properties { get; } = new();
@@ -74,7 +74,7 @@ class ClassTypeMeta
         SourceSyntax = syntax;
         SourceSymbol = symbol;
         
-        LogArgument = LogType.None;
+        NullObjLogArgument = NullObjLog.None;
         
         this.references = references;
         
@@ -89,9 +89,9 @@ class ClassTypeMeta
             {
                 if (SymbolEqualityComparer.Default.Equals(arg.Type, references.LogAttribute))
                 {
-                    LogArgument = arg.Value != null
-                        ? (LogType)arg.Value
-                        : LogType.None;
+                    NullObjLogArgument = arg.Value != null
+                        ? (NullObjLog)arg.Value
+                        : NullObjLog.None;
                     continue;
                 }
             }
